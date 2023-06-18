@@ -1,72 +1,55 @@
-// 1. TypeScript ma'lumot turlari
-// let a = 15
-// a = 45
+// 4 - dars. Tiplarni o'zgartirish va birlashtirish
+// let a: any = 10
+// let b: number = a
+//// !!!!!!!!!!!
+// unknown types
+let a: unknown = 20.1245;
+// let d: number = c
 
-// let a: number;
-// a = 15;
+let e: number = <number>a;
+let f: number = a as number;
+//
+// (a as number).toFixed(2)
 
-// let b: string = "String";
+// union type
+let h: number | string = 10;
+h = "s";
 
-// let c: boolean = true;
+// literal types
+let s: "sm" | "md" | "lg";
 
-// let d = null
+s = "sm";
+s = "lg";
+s = "md";
 
-// let f = {}
-// let f: object = {}
+/// type alieses
+type Sizes = "SM" | "MD" | "LG" | boolean;
+let s2: Sizes = "SM";
 
-// let f: { name: string; age: number } = { name: "Azizbek", age: 22 };
-// f.name
+s2 = "MD";
+s2 = "SM";
+let s3: Sizes = false;
 
-// let g: any;
-// g = 12
-// g= "yes"
+s3 = true;
 
-//////////////////////////////////////////////////////////////////
-// 2. Functions, signature, overload_functions
+type Obj = { name: string } | { age: number };
 
-// function pow(x: number, y: number): number {
-//   return x ** y;
-// }
+let obj: Obj;
+obj = { name: "s" };
+obj = { age: 15 };
+obj = { name: "ziz", age: 15 };
 
-function pow(x: number, y: number): string {
-  return `${x} ** ${y} = ${x ** y}`;
+type Obj2 = { name: string } & { age: number };
+let obj2: Obj2;
+obj2 = { name: "Aziz", age: 22 };
+// obj = {name: "Aziz"} ???!!!
+
+type Obj3 = { name: string; age?: number };
+let obj3: Obj3;
+obj3 = { name: "Aziz", age: 22 };
+
+if ("age" in obj3) {
+  console.log("mavjud");
+} else {
+  console.log("mavjud emas");
 }
-// console.log(pow(4, 3));
-
-// arrow function
-const add = (x: number, y: number): number => x + y;
-
-function log(x: number): void {
-  console.log(x);
-}
-
-function someFunc(s: string): never {
-  throw new Error(s);
-}
-///// signature ////
-
-let c: (x: number, y: string) => string;
-
-c = function (a: number, b: string): string {
-  return `${a}: ${b}`;
-};
-
-// console.log(c(3, "javob"));
-
-////overload_functions////
-
-function overloadFunc(x: number, y:number): number
-function overloadFunc(x: string, y:number): string
-function overloadFunc(x: any, y: any): any {
-  if (typeof x === "number" && typeof y === "number") {
-    return x + y;
-  } else {
-    return `${x} ${y}`;
-  }
-}
-
-console.log(overloadFunc("Javob", 2));
-
-// console.log("hello TypeScript");
-
-// throw new Error("Some Error")
